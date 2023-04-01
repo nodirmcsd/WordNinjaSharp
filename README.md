@@ -14,9 +14,28 @@ Usage
 
 ```csharp
 using WordNinjaSharp.App;
+
 var result = WordNinja.Split("thequickbrownfoxjumpsover1978thelazydog");
 Console.WriteLine(string.Join(" ", result));
 
-//Will print "the quick brown fox jumps over 1978 the lazy dog"
+//the quick brown fox jumps over 1978 the lazy dog
 
 ```
+
+Performance
+-----
+
+```csharp
+
+var sw = Stopwatch.StartNew();
+
+var res = WordNinja.Split("denythyfatherandrefusethyname");
+
+Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
+
+Console.WriteLine(string.Join(" ", res));
+
+//182 ms
+//deny thy father and refuse thy name
+
+```        
