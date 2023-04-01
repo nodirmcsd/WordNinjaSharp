@@ -1,5 +1,6 @@
 # WordNinjaSharp
 
+![wordninjasharp](https://user-images.githubusercontent.com/1277302/229291575-0683a59a-b21f-469d-8661-200982275fa3.jpg)
 
 This project is repackaging the excellent work from here: http://stackoverflow.com/a/11642687/2449774
 
