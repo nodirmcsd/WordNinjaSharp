@@ -40,7 +40,7 @@ public class WordNinja
 
     #region Private Methods
 
-    private void AddWords(ref List<string> dictionary, string? line)
+    private static void AddWords(ref List<string> dictionary, string? line)
     {
         if (string.IsNullOrEmpty(line)) return;
         var w = Tokenize(line).ToList();
@@ -53,15 +53,16 @@ public class WordNinja
 
     public Tuple<double, int> BestMatch(int i, IReadOnlyList<double> cost, string s)
     {
-        var candidates = Enumerable.Range(Math.Max(0, i - _maxWord), i)
+        var candidates = Enumerable
+            .Range(Math.Max(0, i - _maxWord), i)
             .Reverse()
             .Select((c, index) => new { Index = index, Cost = cost[c] });
 
-        return candidates.Select(c => Tuple.Create(
-                c.Cost + _wordCost
-                    .GetValueOrDefault(s.Substring(i - c.Index - 1, c.Index + 1)
-                        .ToLowerInvariant(), double.PositiveInfinity),
-                c.Index + 1))
+        return candidates.Select(c =>
+                Tuple.Create(c.Cost +
+                             _wordCost.GetValueOrDefault(
+                                 s.Substring(i - c.Index - 1, c.Index + 1).ToLowerInvariant(), double.PositiveInfinity),
+                    c.Index + 1))
             .Min()!;
     }
 
