@@ -27,7 +27,7 @@ Console.WriteLine(string.Join(" ", result));
 
 Performance
 -----
-It the fastest then all other!!! 
+The fastest then all other!!! 
 
 
 ```csharp
