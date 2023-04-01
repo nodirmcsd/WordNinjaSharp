@@ -8,6 +8,9 @@ This project is repackaging the excellent work from here: http://stackoverflow.c
 
 This project is C#.Net version of https://github.com/keredson/wordninja
 
+Usage
+-----
+
 ```csharp
 using WordNinjaSharp.App;
 var result = WordNinja.Split("thequickbrownfoxjumpsover1978thelazydog");
