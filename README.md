@@ -52,6 +52,15 @@ Install
 dotnet add package WordNinjaSharp 
 ```
 
+or 
+
 ```
 Install-Package WordNinjaSharp
+```
+
+Custom dictionary 
+-----
+```csharp
+var path = @"path/to/your/words/list";
+var res = WordNinja.Split("denythyfatherandrefusethyname", path);
 ```
