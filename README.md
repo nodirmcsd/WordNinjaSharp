@@ -1,6 +1,6 @@
 # WordNinjaSharp
 
-C#.Net Library for spliting concatenated words, using NLP based on English Wikipedia unigram frequencies.
+C#.Net Library for splitting concatenated words, using NLP based on English Wikipedia unigram frequencies.
 
 ![wordninjasharp-250](https://user-images.githubusercontent.com/1277302/229291849-d5b1b9c3-ee41-4722-a5db-c00aaa51909e.jpg)
 
