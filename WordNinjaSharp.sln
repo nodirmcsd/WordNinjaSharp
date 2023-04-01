@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordNinjaSharp.App", "WordNinja.App\WordNinjaSharp.App.csproj", "{FFDCE728-A2A9-481A-A664-E10FC8F4C6F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordNinjaSharp.Tests", "WordNinja.Tests\WordNinjaSharp.Tests.csproj", "{BA9BD272-1C5F-40B8-A062-00311DEA239D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFDCE728-A2A9-481A-A664-E10FC8F4C6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDCE728-A2A9-481A-A664-E10FC8F4C6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDCE728-A2A9-481A-A664-E10FC8F4C6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDCE728-A2A9-481A-A664-E10FC8F4C6F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA9BD272-1C5F-40B8-A062-00311DEA239D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA9BD272-1C5F-40B8-A062-00311DEA239D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA9BD272-1C5F-40B8-A062-00311DEA239D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA9BD272-1C5F-40B8-A062-00311DEA239D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EFA4A9D-F601-4CC8-ADDC-12328F7A06D2}
+	EndGlobalSection
+EndGlobal
