@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using WordNinjaSharp.App;
 
 namespace WordNinjaSharp.Tests;
@@ -54,5 +55,13 @@ public class WordNinjaTest
         Console.WriteLine(string.Join(" ", res));
     }
 
-   
+    [TestMethod]
+    public void TestPerformance()
+    {
+        var sw = Stopwatch.StartNew();
+        var res = WordNinja.Split("denythyfatherandrefusethyname");
+        Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
+        Console.WriteLine(string.Join(" ", res));
+    }
+
 }

@@ -4,7 +4,26 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>WordNinja C# Library </Title>
+    <PackageId>WordNinjaSharp</PackageId>
+    <Authors>Nodir Azam</Authors>
+    <Product>WordNinjaSharp</Product>
+    <Description>C#.Net Library for splitting concatenated words, using NLP based on English Wikipedia unigram frequencies.</Description>
+    <PackageProjectUrl>https://github.com/nodirmcsd/WordNinjaSharp</PackageProjectUrl>
+    <PackageIcon>wordninjasharp-250.jpg</PackageIcon>
+    <RepositoryUrl>https://github.com/nodirmcsd/WordNinjaSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>NLP, TextProcessing</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Azamhujaev\Desktop\wordninjasharp-250.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.16.0" />
