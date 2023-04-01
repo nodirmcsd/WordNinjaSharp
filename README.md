@@ -9,7 +9,7 @@ This project is repackaging the excellent work from here: http://stackoverflow.c
 
 This project is C#.Net version of https://github.com/keredson/wordninja
 
-I always use this library for slicing damaged bigdata data (ML, Text Classification).
+Use this library for slicing damaged data, etc.
 
 
 Usage
