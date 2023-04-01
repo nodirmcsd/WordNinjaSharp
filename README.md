@@ -61,6 +61,6 @@ Install-Package WordNinjaSharp
 Custom dictionary 
 -----
 ```csharp
-var path = @"path/to/your/words/list";
+var path = @"path/to/your/words/list/gzarchive/or/txtfile";
 var res = WordNinja.Split("denythyfatherandrefusethyname", path);
 ```
