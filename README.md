@@ -44,3 +44,14 @@ Console.WriteLine(string.Join(" ", res));
 //deny thy father and refuse thy name
 
 ```        
+
+Install
+-----
+
+```
+dotnet add package WordNinjaSharp 
+```
+
+```
+Install-Package WordNinjaSharp
+```
