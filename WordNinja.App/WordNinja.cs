@@ -16,17 +16,9 @@ public class WordNinja
         LoadDictionary(path);
     }
 
-    private static string GetDefaultDictionaryPath()
-    {
-        var currentExecutePath = Assembly.GetExecutingAssembly().Location;
-        var currentExecuteDirectory = Path.GetDirectoryName(currentExecutePath)!;
-        return Path.Combine(currentExecuteDirectory, "wordninja.words.txt.gz");
-    }
-    
     public static string Split(string inputString, string? dictionaryPath = null)
     {
         dictionaryPath ??= GetDefaultDictionaryPath();
-        
         if (string.IsNullOrEmpty(inputString))
             throw new ArgumentException($"{nameof(inputString)} is not specified");
         if (inputString.Length > InputMaxLength)
@@ -34,8 +26,14 @@ public class WordNinja
         if (!File.Exists(dictionaryPath))
             throw new ArgumentException($"dictionary file is not found. {nameof(dictionaryPath)} = {dictionaryPath}");
         _instance ??= new WordNinja(dictionaryPath);
-
         return _instance.InferSpaces(CleanSourceString(inputString));
+    }
+
+    private static string GetDefaultDictionaryPath()
+    {
+        var currentExecutePath = Assembly.GetExecutingAssembly().Location;
+        var currentExecuteDirectory = Path.GetDirectoryName(currentExecutePath)!;
+        return Path.Combine(currentExecuteDirectory, "wordninja.words.txt.gz");
     }
 
     #region Private Methods
@@ -47,9 +45,10 @@ public class WordNinja
         if (w.Any()) dictionary.AddRange(w);
     }
 
-    private static string CleanSourceString(string src) =>
-        string.Join("", src.Where(x => char.IsLetterOrDigit(x) || x == '\''));
-
+    private static string CleanSourceString(string src)
+    {
+        return string.Join("", src.Where(x => char.IsLetterOrDigit(x) || x == '\''));
+    }
 
     public Tuple<double, int> BestMatch(int i, IReadOnlyList<double> cost, string s)
     {
@@ -57,7 +56,6 @@ public class WordNinja
             .Range(Math.Max(0, i - _maxWord), i)
             .Reverse()
             .Select((c, index) => new { Index = index, Cost = cost[c] });
-
         return candidates.Select(c =>
                 Tuple.Create(c.Cost +
                              _wordCost.GetValueOrDefault(
@@ -65,7 +63,6 @@ public class WordNinja
                     c.Index + 1))
             .Min()!;
     }
-
 
     private string InferSpaces(string? inputString)
     {
@@ -158,7 +155,6 @@ public class WordNinja
             throw new Exception("no words loaded");
         if (words.Count > WordsMaxCount)
             throw new Exception($"the maximum number of words in dictionary = {WordsMaxCount}");
-
         _wordCost = words
             .Distinct()
             .Select((word, index) => new
@@ -167,14 +163,13 @@ public class WordNinja
                 Value = Math.Log((index + 1) * Math.Log(words.Count))
             })
             .ToDictionary(x => x.Key, x => x.Value);
-
         _maxWord = words.Max(word => word.Length);
     }
-    
-    private static IEnumerable<string> Tokenize(string line)
-        => line.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
 
-    
+    private static IEnumerable<string> Tokenize(string line)
+    {
+        return line.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
+    }
 
     #endregion
 }

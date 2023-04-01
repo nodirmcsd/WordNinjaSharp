@@ -27,27 +27,30 @@ public class WordNinjaTest
         "Or if thou wilt not be but sworn my love",
         "And I'll no longer be a Capulet",
         "My only love sprung from my only hate",
-        "Too early seen unknown and known too late",
+        "Too early seen unknown and known too late"
     };
 
     [TestMethod]
-    public void TestSplitMany()
+    public void Split_CorrectInputString_SplitsWords()
     {
-        var testSentences = _sentences
-            .ToDictionary(x => x.ToLower(), y => y.Replace(" ", "").ToLower());
-
-        foreach (var testSentence in testSentences)
-        {
-            var sentence = WordNinja.Split(testSentence.Value);
-            Console.WriteLine(testSentence.Key);
-            Console.WriteLine(sentence);
-            Assert.AreEqual(sentence, testSentence.Key);
-        }
-
+        var input = "thisisastring";
+        var expectedResult = "this is a string";
+        var result = WordNinja.Split(input);
+        Console.WriteLine(result);
+        Assert.AreEqual(expectedResult, result);
     }
 
     [TestMethod]
-    public void TestSplitOne()
+    public void Split_CorrectInputString_SplitsWords_And_Performance()
+    {
+        var sw = Stopwatch.StartNew();
+        var res = WordNinja.Split("denythyfatherandrefusethyname");
+        Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
+        Console.WriteLine(string.Join(" ", res));
+    }
+
+    [TestMethod]
+    public void Split_CorrectInputString1_SplitsWords()
     {
         var res = WordNinja.Split("thequickbrownfoxjumpsover1978thelazydog");
         Assert.IsNotNull(res);
@@ -56,12 +59,41 @@ public class WordNinjaTest
     }
 
     [TestMethod]
-    public void TestPerformance()
+    public void Split_CorrectInputStrings_SplitsWords()
     {
-        var sw = Stopwatch.StartNew();
-        var res = WordNinja.Split("denythyfatherandrefusethyname");
-        Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
-        Console.WriteLine(string.Join(" ", res));
+        var testSentences = _sentences
+            .ToDictionary(x => x.ToLower(), y => y.Replace(" ", "").ToLower());
+        foreach (var testSentence in testSentences)
+        {
+            var sentence = WordNinja.Split(testSentence.Value);
+            Console.WriteLine(testSentence.Key);
+            Console.WriteLine(sentence);
+            Assert.AreEqual(sentence, testSentence.Key);
+        }
     }
 
+    [TestMethod]
+    public void Split_EmptyInputString_ThrowsArgumentException()
+    {
+        Assert.ThrowsException<ArgumentException>(() => WordNinja.Split(""));
+    }
+
+    [TestMethod]
+    public void Split_InvalidDictionaryPath_ThrowsArgumentException()
+    {
+        Assert.ThrowsException<ArgumentException>(() => WordNinja.Split("test", "invalid path"));
+    }
+
+    [TestMethod]
+    public void Split_LongInputString_ThrowsArgumentException()
+    {
+        var input = new string('a', 2001);
+        Assert.ThrowsException<ArgumentException>(() => WordNinja.Split(input));
+    }
+
+    [TestMethod]
+    public void Split_NullInputString_ThrowsArgumentException()
+    {
+        Assert.ThrowsException<ArgumentException>(() => WordNinja.Split(null));
+    }
 }
