@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace WordNinjaSharp.App;
 
+/// <summary>
+///     WordNinja
+/// </summary>
 public class WordNinja
 {
     private const int InputMaxLength = 2000;
@@ -11,11 +14,23 @@ public class WordNinja
     private static Dictionary<string, double> _wordCost = new();
     private static WordNinja? _instance;
 
+    /// <summary>
+    ///     WordNinja
+    /// </summary>
+    /// <param name="path"></param>
     private WordNinja(string path)
     {
         LoadDictionary(path);
     }
 
+
+    /// <summary>
+    ///     Splits damaged words
+    /// </summary>
+    /// <param name="inputString"></param>
+    /// <param name="dictionaryPath"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
     public static string Split(string inputString, string? dictionaryPath = null)
     {
         dictionaryPath ??= GetDefaultDictionaryPath();
@@ -25,10 +40,15 @@ public class WordNinja
             throw new ArgumentException($"{nameof(inputString)} is too long. MaxLength = {InputMaxLength}");
         if (!File.Exists(dictionaryPath))
             throw new ArgumentException($"dictionary file is not found. {nameof(dictionaryPath)} = {dictionaryPath}");
+
         _instance ??= new WordNinja(dictionaryPath);
-        return _instance.InferSpaces(CleanSourceString(inputString));
+        return _instance.SplitToWords(CleanSourceString(inputString));
     }
 
+    /// <summary>
+    ///  Gets default dictionary path
+    /// </summary>
+    /// <returns></returns>
     private static string GetDefaultDictionaryPath()
     {
         var currentExecutePath = Assembly.GetExecutingAssembly().Location;
@@ -38,6 +58,11 @@ public class WordNinja
 
     #region Private Methods
 
+    /// <summary>
+    ///     Adds words to dictionary
+    /// </summary>
+    /// <param name="dictionary"></param>
+    /// <param name="line"></param>
     private static void AddWords(ref List<string> dictionary, string? line)
     {
         if (string.IsNullOrEmpty(line)) return;
@@ -45,11 +70,24 @@ public class WordNinja
         if (w.Any()) dictionary.AddRange(w);
     }
 
+
+    /// <summary>
+    ///     Cleans source string 
+    /// </summary>
+    /// <param name="src"></param>
+    /// <returns></returns>
     private static string CleanSourceString(string src)
     {
         return string.Join("", src.Where(x => char.IsLetterOrDigit(x) || x == '\''));
     }
 
+    /// <summary>
+    ///     Finds the best match
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="cost"></param>
+    /// <param name="s"></param>
+    /// <returns></returns>
     public Tuple<double, int> BestMatch(int i, IReadOnlyList<double> cost, string s)
     {
         var candidates = Enumerable
@@ -64,7 +102,7 @@ public class WordNinja
             .Min()!;
     }
 
-    private string InferSpaces(string? inputString)
+    private string SplitToWords(string? inputString)
     {
         inputString = inputString?.Trim().ToLowerInvariant();
         if (string.IsNullOrEmpty(inputString))
@@ -120,7 +158,13 @@ public class WordNinja
         return string.Join(" ", outList);
     }
 
-    private void LoadDictionary(string path)
+    /// <summary>
+    ///     Loads dictionary 
+    /// </summary>
+    /// <param name="path"></param>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="Exception"></exception>
+    private static void LoadDictionary(string path)
     {
         if (!File.Exists(path))
             throw new ArgumentException($"dictionary file is not found. {nameof(path)} = {path}");
@@ -166,6 +210,11 @@ public class WordNinja
         _maxWord = words.Max(word => word.Length);
     }
 
+    /// <summary>
+    /// Gets tokens
+    /// </summary>
+    /// <param name="line"></param>
+    /// <returns></returns>
     private static IEnumerable<string> Tokenize(string line)
     {
         return line.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);

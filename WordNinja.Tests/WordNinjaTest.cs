@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Globalization;
 using WordNinjaSharp.App;
 
 namespace WordNinjaSharp.Tests;
@@ -45,7 +46,7 @@ public class WordNinjaTest
     {
         var sw = Stopwatch.StartNew();
         var res = WordNinja.Split("denythyfatherandrefusethyname");
-        Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
+        Console.WriteLine($"{sw.Elapsed.TotalMilliseconds.ToString(CultureInfo.InvariantCulture)} ms");
         Console.WriteLine(string.Join(" ", res));
     }
 
